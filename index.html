@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090f1d">
+  <meta name="description" content="Tech Nexo — desenvolvimento de sites, landing pages e experiências digitais para negócios que querem crescer.">
+  <title>Tech Nexo | Tecnologia que conecta negócios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090f1d;
+      --bg-soft: #0e1728;
+      --panel: rgba(19, 31, 52, .76);
+      --line: rgba(148, 177, 218, .14);
+      --text: #f4f7fc;
+      --muted: #a4b1c6;
+      --blue: #3478f6;
+      --cyan: #25d8ee;
+      --max: 1160px;
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background:
+        radial-gradient(ellipse at 80% 8%, rgba(25, 111, 238, .16), transparent 32rem),
+        radial-gradient(ellipse at 0% 35%, rgba(24, 210, 230, .07), transparent 30rem),
+        var(--bg);
+      font-family: "DM Sans", sans-serif; line-height: 1.6; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .top-glow { position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), var(--blue), transparent); opacity: .8; }
+    header {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px);
+      background: rgba(9, 15, 29, .78); border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font: 700 21px "Space Grotesk", sans-serif; letter-spacing: -.7px; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+      color: white; background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 7px 26px rgba(37, 143, 245, .25);
+    }
+    .brand-mark svg { width: 23px; }
+    .brand span span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: white; }
+    .btn {
+      border: 0; cursor: pointer; display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      padding: 13px 19px; border-radius: 12px; font-weight: 700; font-size: 14px; transition: .22s ease;
+    }
+    .btn-primary { color: white; background: linear-gradient(110deg, #2869ed, #168bdc); box-shadow: 0 10px 28px rgba(36, 112, 238, .22); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(36, 112, 238, .34); }
+    .btn-outline { border: 1px solid rgba(151, 184, 229, .25); color: var(--text); background: rgba(255,255,255,.025); }
+    .btn-outline:hover { border-color: var(--cyan); background: rgba(37,216,238,.06); }
+    .menu-toggle { display: none; background: none; color: white; border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; }
+    .hero { padding: 106px 0 92px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 58px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 7px 12px; border: 1px solid rgba(37,216,238,.23); border-radius: 999px; color: #9debf4; background: rgba(37,216,238,.06); font-size: 12px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; }
+    .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 13px var(--cyan); }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.12; letter-spacing: -1.5px; }
+    h1 { font-size: clamp(42px, 5.5vw, 68px); margin: 23px 0 20px; max-width: 680px; }
+    .gradient-text { background: linear-gradient(100deg, #fff 10%, #8bdff2 48%, #5795ff 92%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { color: var(--muted); font-size: 17px; max-width: 570px; margin: 0 0 29px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { margin-top: 23px; color: #7f8da4; font-size: 12px; }
+    .visual { min-height: 420px; position: relative; display: grid; place-items: center; }
+    .orbit { position: absolute; width: min(100%, 430px); aspect-ratio: 1; border: 1px solid rgba(77, 153, 255, .19); border-radius: 50%; transform: rotate(-22deg); }
+    .orbit:before, .orbit:after { content: ""; position: absolute; border: 1px solid rgba(37,216,238,.14); border-radius: 50%; inset: 34px; }
+    .orbit:after { inset: 76px; border-color: rgba(77,153,255,.14); }
+    .orbit-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 20px var(--cyan); top: 12%; right: 18%; }
+    .core-card {
+      width: min(100%, 340px); padding: 25px; border: 1px solid rgba(137,177,231,.22); border-radius: 25px;
+      background: linear-gradient(145deg, rgba(24,42,70,.92), rgba(12,22,39,.94));
+      box-shadow: 0 30px 90px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.06); position: relative; z-index: 2;
+      transform: rotate(-3deg);
+    }
+    .core-top { display: flex; justify-content: space-between; align-items: center; color: #8fa4c1; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; }
+    .status { color: #73e8c1; display: inline-flex; align-items: center; gap: 6px; }
+    .status:before { content: ""; width: 6px; height: 6px; background: #73e8c1; border-radius: 50%; }
+    .nexo-symbol { width: 100px; height: 100px; margin: 31px auto 24px; display: grid; place-items: center; border-radius: 28px; background: linear-gradient(135deg, #2869ed, #22cce8); box-shadow: 0 15px 45px rgba(30,139,235,.3); }
+    .nexo-symbol svg { width: 62px; }
+    .core-card h3 { text-align: center; font-size: 24px; margin: 0; letter-spacing: -.6px; }
+    .core-card p { color: #9aabc3; text-align: center; font-size: 12px; margin: 8px 0 22px; }
+    .mini-bars { display: flex; gap: 7px; justify-content: center; }
+    .mini-bars span { height: 5px; border-radius: 10px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+    .mini-bars span:nth-child(1) { width: 32px; opacity: .5; }
+    .mini-bars span:nth-child(2) { width: 55px; }
+    .mini-bars span:nth-child(3) { width: 22px; opacity: .65; }
+    .float-tag { position: absolute; z-index: 3; padding: 11px 14px; border: 1px solid var(--line); border-radius: 13px; background: rgba(14,24,42,.88); box-shadow: 0 14px 35px rgba(0,0,0,.2); color: #c7d5e9; font-size: 12px; }
+    .float-tag strong { color: var(--cyan); display: block; font-size: 14px; }
+    .tag-one { left: 0; top: 19%; }
+    .tag-two { right: 0; bottom: 17%; }
+    section { padding: 88px 0; }
+    .section-head { max-width: 650px; margin-bottom: 38px; }
+    .section-kicker { color: var(--cyan); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; }
+    h2 { font-size: clamp(32px, 4vw, 45px); margin: 12px 0 14px; }
+    .section-head p, .about-copy { color: var(--muted); margin: 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .service-card, .project-card, .about-panel, .contact-panel {
+      border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(20,34,56,.78), rgba(13,22,38,.72));
+    }
+    .service-card { padding: 25px; transition: .25s ease; }
+    .service-card:hover, .project-card:hover { transform: translateY(-5px); border-color: rgba(37,216,238,.38); }
+    .icon-box { width: 47px; height: 47px; display: grid; place-items: center; color: var(--cyan); border: 1px solid rgba(37,216,238,.2); background: rgba(37,216,238,.07); border-radius: 14px; margin-bottom: 20px; }
+    .icon-box svg { width: 23px; height: 23px; }
+    .service-card h3 { font-size: 19px; margin: 0 0 10px; letter-spacing: -.4px; }
+    .service-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 50px; align-items: center; }
+    .about-panel { padding: 30px; position: relative; overflow: hidden; }
+    .about-panel:after { content: ""; position: absolute; width: 220px; height: 220px; right: -100px; bottom: -120px; border-radius: 50%; background: rgba(35,124,245,.2); filter: blur(20px); }
+    .about-stat { display: flex; align-items: center; gap: 16px; padding: 17px 0; border-bottom: 1px solid var(--line); position: relative; z-index: 1; }
+    .about-stat:last-child { border: 0; }
+    .stat-number { font: 700 27px "Space Grotesk"; color: var(--cyan); min-width: 65px; }
+    .about-stat strong { display: block; font-size: 14px; }
+    .about-stat small { color: var(--muted); font-size: 12px; }
+    .about-copy { font-size: 15px; margin: 0 0 18px; }
+    .check-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; color: #c8d5e7; font-size: 14px; }
+    .check-list li:before { content: "✓"; color: var(--cyan); font-weight: 700; margin-right: 10px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project-card { overflow: hidden; transition: .25s ease; }
+    .project-art { min-height: 205px; display: grid; place-items: center; padding: 28px; background: radial-gradient(circle at 50% 40%, rgba(44,119,242,.28), transparent 55%), #101d32; }
+    .project-art.alt { background: radial-gradient(circle at 50% 40%, rgba(28,204,220,.2), transparent 55%), #101d32; }
+    .browser { width: 100%; max-width: 390px; border: 1px solid rgba(151,184,229,.28); border-radius: 11px; overflow: hidden; background: #0b1424; box-shadow: 0 18px 35px rgba(0,0,0,.3); }
+    .browser-top { height: 20px; background: #1a2a43; display: flex; align-items: center; gap: 4px; padding: 0 9px; }
+    .browser-top i { width: 5px; height: 5px; border-radius: 50%; background: #69809f; }
+    .browser-content { padding: 17px; text-align: center; }
+    .browser-content b { font: 700 17px "Space Grotesk"; display: block; }
+    .browser-content em { display: block; font-style: normal; color: var(--cyan); font-size: 8px; letter-spacing: 1px; margin: 5px 0 12px; }
+    .browser-line { height: 5px; width: 60%; background: #324969; border-radius: 5px; margin: 6px auto; }
+    .browser-line.short { width: 38%; }
+    .browser-cta { width: 75px; height: 17px; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 5px; margin: 12px auto 0; }
+    .project-info { padding: 22px; }
+    .project-info h3 { margin: 0 0 7px; font-size: 18px; letter-spacing: -.4px; }
+    .project-info p { color: var(--muted); margin: 0; font-size: 13px; }
+    .project-label { display: inline-block; color: #9debf4; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 9px; }
+    .contact-panel { padding: 43px; display: flex; justify-content: space-between; align-items: center; gap: 28px; background: radial-gradient(ellipse at 90% 0%, rgba(39,117,239,.18), transparent 55%), linear-gradient(145deg, #14243c, #0e192b); }
+    .contact-panel h2 { margin: 0 0 10px; }
+    .contact-panel p { color: var(--muted); margin: 0; max-width: 540px; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; color: #7f8da4; font-size: 12px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { color: #dce7f7; font: 700 16px "Space Grotesk"; }
+    .footer-brand span { color: var(--cyan); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 850px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 25px; }
+      .hero { padding: 75px 0 55px; }
+      .visual { min-height: 390px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 17px; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 30px, var(--max)); }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: block; }
+      .nav-cta { display: none; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 22px 22px; background: #0b1424; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 17px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 4px 0; }
+      h1 { font-size: 43px; }
+      .hero-copy { font-size: 15px; }
+      .visual { min-height: 340px; }
+      .orbit { width: 320px; }
+      .core-card { max-width: 280px; padding: 20px; }
+      .nexo-symbol { width: 80px; height: 80px; margin: 23px auto 18px; }
+      .tag-one { left: -3px; top: 12%; }
+      .tag-two { right: -3px; bottom: 10%; }
+      section { padding: 65px 0; }
+      .services-grid, .projects-grid { grid-template-columns: 1fr; }
+      .contact-panel { padding: 28px 23px; align-items: flex-start; flex-direction: column; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *:before, *:after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-glow"></div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Tech Nexo - início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M5 8.5h8.2c3.2 0 5.1 1.9 5.1 4.7v1.1c0 2.8-1.9 4.7-5.1 4.7H5m22-11h-8.2c-3.2 0-5.1 1.9-5.1 4.7v1.1c0 2.8 1.9 4.7 5.1 4.7H27M8 8.5v15m16-15v15" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span>tech <span>nexo</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+        <a href="#inicio">Início</a><a href="#servicos">Serviços</a><a href="#sobre">Sobre</a><a href="#portfolio">Portfólio</a><a href="#contato">Contato</a>
+      </nav>
+      <a class="btn btn-primary nav-cta contact-link" href="#contato">Fale com a gente <span>↗</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><i></i> Tecnologia que conecta negócios</div>
+          <h1>Seu negócio merece uma presença <span class="gradient-text">digital extraordinária.</span></h1>
+          <p class="hero-copy">Criamos sites modernos e experiências digitais que aproximam marcas de pessoas. Estratégia, design e tecnologia trabalhando juntos para levar sua empresa mais longe.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary contact-link" href="#contato">Quero tirar meu projeto do papel <span>↗</span></a>
+            <a class="btn btn-outline" href="#servicos">Conheça nossos serviços</a>
+          </div>
+          <div class="hero-note">Soluções digitais pensadas para o seu próximo passo.</div>
+        </div>
+        <div class="visual reveal" aria-label="Ilustração da identidade Tech Nexo">
+          <div class="orbit"><span class="orbit-dot"></span></div>
+          <div class="float-tag tag-one"><strong>Design + tecnologia</strong>Ideias conectadas</div>
+          <div class="float-tag tag-two"><strong>100% responsivo</strong>Em qualquer tela</div>
+          <div class="core-card">
+            <div class="core-top"><span>Tech Nexo / Studio</span><span class="status">Online</span></div>
+            <div class="nexo-symbol">
+              <svg viewBox="0 0 64 64" fill="none"><path d="M7 17h16c6.3 0 10 3.7 10 9v2c0 5.3-3.7 9-10 9H7m50-20H41c-6.3 0-10 3.7-10 9v2c0 5.3 3.7 9 10 9h16M13 17v30m38-30v30" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Conectando possibilidades.</h3>
+            <p>Seu próximo passo começa aqui.</p>
+            <div class="mini-bars"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">O que fazemos</div>
+          <h2>Tecnologia a serviço do <span class="gradient-text">seu crescimento.</span></h2>
+          <p>Do primeiro clique à experiência completa, criamos soluções digitais para apresentar melhor sua marca e facilitar o contato com seus clientes.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 8h18M8 6h.01M11 6h.01M12 19v2m-4 0h8"/></svg></div>
+            <h3>Sites institucionais</h3><p>Apresente sua empresa com profissionalismo, clareza e uma experiência que funciona em qualquer dispositivo.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4zM8 8h8M8 12h5m-5 4h8"/></svg></div>
+            <h3>Landing pages</h3><p>Páginas focadas em apresentar uma oferta, destacar diferenciais e transformar visitas em oportunidades.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8m0-12.8L5.6 18.4"/></svg></div>
+            <h3>Experiências digitais</h3><p>Projetos personalizados, interativos e criativos para ocasiões e necessidades especiais.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18V6m0 12h16M7 15l4-4 3 2 5-6"/></svg></div>
+            <h3>Otimização e melhorias</h3><p>Aprimoramos estrutura, navegação, velocidade e apresentação para uma presença digital mais consistente.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v14H4zM8 9h8m-8 4h5m-5 3h7"/></svg></div>
+            <h3>Design para negócios</h3><p>Layouts e materiais digitais alinhados à identidade da sua marca e aos objetivos da sua empresa.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7l8-4z"/><path d="M8.5 12l2.3 2.3 4.8-5"/></svg></div>
+            <h3>Suporte digital</h3><p>Conte com apoio para manter seu projeto atualizado e acompanhar sua evolução digital.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container about-grid">
+        <div class="about-panel reveal">
+          <div class="about-stat"><div class="stat-number">01</div><div><strong>Entender</strong><small>Conhecemos seu negócio e seus objetivos.</small></div></div>
+          <div class="about-stat"><div class="stat-number">02</div><div><strong>Criar</strong><small>Desenhamos uma solução para sua realidade.</small></div></div>
+          <div class="about-stat"><div class="stat-number">03</div><div><strong>Conectar</strong><small>Colocamos sua presença digital em movimento.</small></div></div>
+        </div>
+        <div class="reveal">
+          <div class="section-kicker">Sobre a Tech Nexo</div>
+          <h2>Ideias conectadas. <span class="gradient-text">Resultados construídos.</span></h2>
+          <p class="about-copy">A Tech Nexo nasceu com um propósito: tornar a tecnologia mais próxima dos negócios. Unimos criatividade, desenvolvimento e atenção aos detalhes para criar experiências digitais úteis, bonitas e acessíveis.</p>
+          <p class="about-copy">Cada projeto começa ouvindo. Assim, conseguimos transformar necessidades reais em soluções digitais claras e funcionais.</p>
+          <ul class="check-list"><li>Design moderno e adaptado para dispositivos móveis</li><li>Comunicação direta e processo transparente</li><li>Soluções pensadas para cada negócio</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Portfólio</div>
+          <h2>Projetos que dão forma às <span class="gradient-text">ideias.</span></h2>
+          <p>Este espaço será atualizado com projetos reais da Tech Nexo. Os exemplos abaixo são conceitos demonstrativos, não clientes ou trabalhos já realizados.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-art"><div class="browser"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-content"><b>BARBER CLUB</b><em>ESTILO • PERSONALIDADE • ATITUDE</em><div class="browser-line"></div><div class="browser-line short"></div><div class="browser-cta"></div></div></div></div>
+            <div class="project-info"><span class="project-label">Conceito demonstrativo</span><h3>Barbearia — presença digital</h3><p>Uma experiência elegante para apresentar serviços e facilitar agendamentos.</p></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-art alt"><div class="browser"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-content"><b>VIVA BEM</b><em>CUIDADO • EQUILÍBRIO • SAÚDE</em><div class="browser-line"></div><div class="browser-line short"></div><div class="browser-cta"></div></div></div></div>
+            <div class="project-info"><span class="project-label">Conceito demonstrativo</span><h3>Clínica — site institucional</h3><p>Uma apresentação acolhedora para destacar especialidades e informações importantes.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div><div class="section-kicker">Vamos conversar?</div><h2>Seu próximo projeto começa com uma ideia.</h2><p>Conte um pouco sobre o que você precisa. Vamos pensar juntos em uma solução digital para o seu negócio.</p></div>
+          <a class="btn btn-primary contact-link" href="mailto:contato@technexo.com.br">Iniciar conversa <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">tech <span>nexo</span></div>
+      <div>© <span id="year"></span> Tech Nexo. Todos os direitos reservados.</div>
+      <div>Tecnologia que conecta negócios.</div>
+    </div>
+  </footer>
+
+  <script>
+    // CONFIGURAÇÃO: coloque seu WhatsApp com DDI + DDD, somente números.
+    // Exemplo: "5511999999999". Enquanto estiver vazio, os botões abrem o e-mail.
+    const WHATSAPP_NUMBER = "";
+    const CONTACT_EMAIL = "contato@technexo.com.br";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.textContent = open ? "✕" : "☰";
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    }));
+
+    document.querySelectorAll(".contact-link").forEach(link => {
+      if (WHATSAPP_NUMBER.trim()) {
+        link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Conheci a Tech Nexo e gostaria de conversar sobre um projeto.")}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      } else {
+        link.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Quero conversar com a Tech Nexo")}`;
+      }
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
